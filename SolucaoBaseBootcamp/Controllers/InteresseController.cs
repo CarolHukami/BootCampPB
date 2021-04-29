@@ -1,5 +1,7 @@
-﻿using ArquivoBaseBootcamp.Services;
+﻿using ArquivoBaseBootcamp.Models;
+using ArquivoBaseBootcamp.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System;
 
 namespace ArquivoBaseBootcamp.Controllers
@@ -24,7 +26,10 @@ namespace ArquivoBaseBootcamp.Controllers
         [HttpGet]
         public IActionResult ConsultarTodosInteresses()
         {
-            throw new NotImplementedException();
+            // obtem lista de interessados
+            List<Interessado> interessados = _interesseService.ConsultarTodos();
+            // retorna lista com ok
+            return Ok(interessados);
         }
 
         /// <summary>
@@ -36,9 +41,21 @@ namespace ArquivoBaseBootcamp.Controllers
         /// </returns>
         [HttpGet]
         [Route("consultar/{email}")]
-        public IActionResult ConsultarInteresse()
+        public IActionResult ConsultarInteresse(String email)
         {
-            throw new NotImplementedException();
+            // procura interessado
+            Interessado interessado = (Interessado)_interesseService.ConsultarPorEmail(email);
+            // verifica se interessado existe
+            if (interessado == null)
+            {
+                // retorna nao encontrado
+                return NotFound();
+            }
+            else
+            {
+                // interessado encontrado, retorna ele
+                return Ok(interessado);
+            }
         }
 
         /// <summary>
@@ -50,9 +67,21 @@ namespace ArquivoBaseBootcamp.Controllers
         /// </returns>
         [HttpPost]
         [Route("incluir")]
-        public IActionResult AdicionarInteresse()
+        public IActionResult AdicionarInteresse(String nome, String email)
         {
-            throw new NotImplementedException();
+            // inclui novo interessado e obtem resposta do serviço
+            Interessado interessado = (Interessado) _interesseService.Incluir(nome, email);
+            // verifica se interessado foi realmente criado
+            if (interessado == null)
+            {
+                // retorna nao encontrado
+                return NotFound();
+            }
+            else
+            {
+                // interessado encontrado, retorna ele
+                return Ok(interessado);
+            }
         }
 
         /// <summary>
@@ -64,9 +93,21 @@ namespace ArquivoBaseBootcamp.Controllers
         /// </returns>
         [HttpPut]
         [Route("atualizar/{email}")]
-        public IActionResult AtualizarInteresse()
+        public IActionResult AtualizarInteresse(String email, String nome)
         {
-            throw new NotImplementedException();
+            // obtem interessado e atualiza caso existe
+            Interessado interessado = _interesseService.AtualizarEmail(email, nome);
+            // verifica se foi atualizado
+            if (interessado == null)
+            {
+                // interessado nao encontrado
+                return NotFound();
+            }
+            else
+            {
+                // interessado atualizado
+                return Ok(interessado);
+            }
         }
 
         /// <summary>
@@ -78,9 +119,20 @@ namespace ArquivoBaseBootcamp.Controllers
         /// </returns>
         [HttpDelete]
         [Route("excluir/{email}")]
-        public IActionResult ExcluirInteresse()
+        public IActionResult ExcluirInteresse(String email)
         {
-            throw new NotImplementedException();
+            // tenta excluir
+            bool encontrado = _interesseService.ExcluirPorEmail(email);
+            // verifica se foi excluido
+            if (encontrado)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+            
         }
     }
 }
