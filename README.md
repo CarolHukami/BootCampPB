@@ -1,5 +1,7 @@
 # BootCampPB - 2021
 
+**Implementado por Caroline Hukami Feitosa.**
+
 Este repositório apresenta minha solução do projeto de BootCamp da trilha de back end do processo seletivo do Paraná Banco (PB). Abaixo, explico quais foram as alterações e adições necessárias para a conclusão do projeto solicitado, que consiste em um CRUD de interessados (com nome e e-mail dos usuários).
 
 # Arquivos Adicionados/Modificados
@@ -24,3 +26,12 @@ No serviço de interesse, foi adicionado uma lista de interessados, cujo objetiv
  - *AtualizarEmail*: verifica se existe um interessado com o *email* passado como parâmetro. Se não existir, retorna *null*. Caso contrário, altera o nome do interessado encontrado utilizando o *nome* passado como parâmetro.
  - *ExcluirPorEmail*: anda na lista de interessados e verifica se o *email* passado como parâmetro pertence a algum interesado. Se encontrar, remove o interessado da lista e retorna *true*. Caso contrário, retorna *false*.
 
+## Controllers/InteresseController.cs
+
+No controlador de interesse, para cada método já criado no projeto base, foram implementadas as lógicas necessárias para o funcionamento das mesmas. Os métodos implementados utilizam o serviço *InteresseService* para gerenciar a lista de usuários. Os seguintes métodos foram modificados:
+
+ - *ConsultarTodosInteresses*: utiliza o método *ConsultarTodos* do serviço e retorna a lista de interessados.
+ - *ConsultarInteresse*: utiliza o método *ConsultarPorEmail* do serviço e verifica se o usuário foi encontrado. Se foi, retorna **NotFound**. Caso contrário, retorna **Ok**, com o respetivo interessado.
+ - *AdicionarInteresse*: utiliza o método *Incluir* do serviço e verifica se o usuário foi criado. Se foi, retorna **Ok** com os dados do mesmo. Caso contrário, retorna **NotFound**.
+ - *AtualizarInteresse*: utiliza o método *AtualizarEmail* do serviço e verifica se o usuário foi atualizado. Se foi, retorna **Ok** com os dados do mesmo. Caso contrário, retorna **NotFound**.
+ - *ExcluirInteresse*: utiliza o método *ExcluirInteresse* do servivço e verifica se o usuário foi excluído. Se foi, retorna **Ok**. Caso contrário, retorna **NotFound**.
