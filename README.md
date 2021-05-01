@@ -2,7 +2,7 @@
 
 **Implementado por Caroline Hukami Feitosa.**
 
-Este repositório apresenta minha solução do projeto de BootCamp da trilha de back end do processo seletivo do Paraná Banco (PB). Abaixo, explico quais foram as alterações e adições necessárias para a conclusão do projeto solicitado, que consiste em um CRUD de interessados (com nome e e-mail dos usuários).
+Este repositório apresenta minha solução do projeto de BootCamp da trilha de back end do processo seletivo do Paraná Banco (PB). Abaixo, explico quais foram as alterações e adições necessárias para a conclusão do projeto solicitado, que consiste em um CRUD de interessados (com nome e e-mail dos usuários). Todos os códigos foram implementados utilizando o Visual Studio 2019.
 
 # Arquivos Adicionados/Modificados
 
